@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,17 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+
+Route::get('/users' , [UserController::class , 'index']);
+Route::get('/users/create' , [UserController::class , 'create']);
+Route::post('/users' , [UserController::class , 'store'])->name('users.store');
+Route::get('/users/edit/{id}' , [UserController::class , 'edit']);
+Route::post('update/{id}' , [UserController::class , 'update'])->name('users.update');
+Route::get('delete/{id}' , [UserController::class , 'destroy']);
+
 require __DIR__.'/auth.php';
+
+Route::get('/add', function () {
+    return view('users.addusers');
+});
+
